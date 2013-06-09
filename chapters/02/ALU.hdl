@@ -46,4 +46,19 @@ CHIP ALU {
 
     PARTS:
    // Put you code here:
+	 ZeroNot(in=x, z=zx, n=nx, out=okx);
+	 ZeroNot(in=y, z=zy, n=ny, out=oky);
+	 Add16(a=okx, b=oky, out=addxy);
+	 And16(a=okx, b=oky, out=andxy);
+	 Mux16(a=andxy, b=addxy, sel=f, out=fout);
+
+	 // Cheated starting here... thanks https://github.com/goj/nand2tetris/blob/master/projects/02/ALU.hdl
+	 ZeroNot(in=fout, z=false, n=no, out=out,
+	 																 out[0..7]=low,
+																	 out[8..15]=high,
+													 				 out[15]=ng);
+	 Or8Way(in=low, out=lowor);
+	 Or8Way(in=high, out=highor);
+	 Or(a=lowor, b=highor, out=any);
+	 Not(in=any, out=zr);
 }
