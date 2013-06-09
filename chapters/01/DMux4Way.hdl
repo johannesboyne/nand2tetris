@@ -17,4 +17,7 @@ CHIP DMux4Way {
 
     PARTS:
     // Put your code here:
+		DMux(in=in, sel=sel[1], a=ab, b=cd); // If sel[1]=0, then a decides a or b, and b decides c or d
+		DMux(in=ab, sel=sel[0], a=a, b=b); // Use sel[0] to send ab to its final position (a or b)
+		DMux(in=cd, sel=sel[0], a=c, b=d); // Use sel[0] to send cd to its final position (c or d)
 }
