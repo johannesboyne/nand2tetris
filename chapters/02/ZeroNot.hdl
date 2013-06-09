@@ -1,0 +1,27 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/02/ALU.hdl
+
+/**
+ * ZeroNot zeroes and negates the input, if requested.
+ */
+
+// if (z==1) set in = 0        // 16-bit constant
+// if (n==1) set in = ~in      // bitwise "not"
+  
+CHIP ZeroNot {
+    IN  
+        in[16],  // 16-bit inputs        
+        z, // zero the input?
+        n; // negate the input?
+
+    OUT 
+        out[16]; // 16-bit output
+
+    PARTS:
+   // Put you code here:
+	 Mux16(a=in, b=false, sel=z, out=inz);
+	 Not16(in=inz, out=inn);
+	 Mux16(a=inz, b=inn, sel=n, out=out);
+}
